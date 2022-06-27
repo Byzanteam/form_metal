@@ -24,3 +24,6 @@ form_metal-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# plt files
+/priv/plts/
