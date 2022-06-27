@@ -88,8 +88,8 @@
           # If you don't want TODO comments to cause `mix credo` to fail, just
           # set this value to 0 (zero).
           #
-          {Credo.Check.Design.TagTODO, [exit_status: 2]},
-          {Credo.Check.Design.TagFIXME, []},
+          {Credo.Check.Design.TagTODO, [exit_status: 0]},
+          {Credo.Check.Design.TagFIXME, [exit_status: 0]},
 
           #
           ## Readability Checks
@@ -114,7 +114,7 @@
           {Credo.Check.Readability.TrailingWhiteSpace, []},
           {Credo.Check.Readability.UnnecessaryAliasExpansion, []},
           {Credo.Check.Readability.VariableNames, []},
-          {Credo.Check.Readability.WithSingleClause, []},
+          {Credo.Check.Readability.WithSingleClause, false},
 
           #
           ## Refactoring Opportunities
@@ -156,7 +156,27 @@
           {Credo.Check.Warning.UnusedRegexOperation, []},
           {Credo.Check.Warning.UnusedStringOperation, []},
           {Credo.Check.Warning.UnusedTupleOperation, []},
-          {Credo.Check.Warning.UnsafeExec, []}
+          {Credo.Check.Warning.UnsafeExec, []},
+
+          {Credo.Check.Consistency.UnusedVariableNames, [force: :meaningful]},
+          {Credo.Check.Consistency.UnusedVariableNames, []},
+          {Credo.Check.Design.SkipTestWithoutComment, []},
+          {Credo.Check.Readability.SeparateAliasRequire, []},
+          {Credo.Check.Readability.Specs, [include_defp: false]},
+          {Credo.Check.Readability.StrictModuleLayout, []},
+          {Credo.Check.Readability.WithCustomTaggedTuple, []},
+          {Credo.Check.Refactor.ABCSize, []},
+          {Credo.Check.Refactor.DoubleBooleanNegation, []},
+          {Credo.Check.Refactor.FilterReject, []},
+          {Credo.Check.Refactor.IoPuts, []},
+          {Credo.Check.Refactor.MapMap, []},
+          {Credo.Check.Refactor.ModuleDependencies, [priority: :low]},
+          {Credo.Check.Refactor.PipeChainStart, []},
+          {Credo.Check.Refactor.RejectFilter, []},
+          {Credo.Check.Warning.LeakyEnvironment, []},
+          {Credo.Check.Warning.MapGetUnsafePass, []},
+          {Credo.Check.Readability.SinglePipe, [allow_0_arity_functions: true]},
+          {Credo.Check.Warning.UnsafeToAtom, []}
         ],
         disabled: [
           #
@@ -167,36 +187,16 @@
           #   and be sure to use `mix credo --strict` to see low priority checks)
           #
           {Credo.Check.Consistency.MultiAliasImportRequireUse, []},
-          {Credo.Check.Consistency.UnusedVariableNames, []},
-          {Credo.Check.Design.DuplicatedCode, []},
-          {Credo.Check.Design.SkipTestWithoutComment, []},
           {Credo.Check.Readability.AliasAs, []},
           {Credo.Check.Readability.BlockPipe, []},
           {Credo.Check.Readability.ImplTrue, []},
           {Credo.Check.Readability.MultiAlias, []},
-          {Credo.Check.Readability.NestedFunctionCalls, []},
-          {Credo.Check.Readability.SeparateAliasRequire, []},
           {Credo.Check.Readability.SingleFunctionToBlockPipe, []},
-          {Credo.Check.Readability.SinglePipe, []},
-          {Credo.Check.Readability.Specs, []},
-          {Credo.Check.Readability.StrictModuleLayout, []},
-          {Credo.Check.Readability.WithCustomTaggedTuple, []},
-          {Credo.Check.Refactor.ABCSize, []},
+          {Credo.Check.Design.DuplicatedCode, []},
           {Credo.Check.Refactor.AppendSingleItem, []},
-          {Credo.Check.Refactor.DoubleBooleanNegation, []},
-          {Credo.Check.Refactor.FilterReject, []},
-          {Credo.Check.Refactor.IoPuts, []},
-          {Credo.Check.Refactor.MapMap, []},
-          {Credo.Check.Refactor.ModuleDependencies, []},
           {Credo.Check.Refactor.NegatedIsNil, []},
-          {Credo.Check.Refactor.PipeChainStart, []},
-          {Credo.Check.Refactor.RejectFilter, []},
           {Credo.Check.Refactor.VariableRebinding, []},
-          {Credo.Check.Warning.LazyLogging, []},
-          {Credo.Check.Warning.LeakyEnvironment, []},
-          {Credo.Check.Warning.MapGetUnsafePass, []},
-          {Credo.Check.Warning.MixEnv, []},
-          {Credo.Check.Warning.UnsafeToAtom, []}
+          {Credo.Check.Warning.MixEnv, []}
 
           # {Credo.Check.Refactor.MapInto, []},
 
