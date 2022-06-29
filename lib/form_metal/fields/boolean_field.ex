@@ -2,13 +2,7 @@ defmodule FormMetal.Fields.BooleanField do
   @moduledoc """
   Define a boolean field.
 
-  ## Options
-
-    * `:attrs_changeset` - the function to build the changeset from params.
-      It can be changed by passing an MFA tuple. The field schema
-      and parameters arguments will be prepended to the given args. For example,
-      using `with: {Author, :attrs_changeset, ["hello"]}` will be invoked as
-      `Author.attrs_changeset(schema, params, "hello")`
+  #{FormMetal.Fields.Builder.options_doc()}
 
   ## Example
 
