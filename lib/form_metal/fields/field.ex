@@ -57,6 +57,13 @@ defmodule FormMetal.Fields.Field do
     end
   end
 
+  @spec ensure_type_module!(Ecto.Type.t()) :: no_return()
+  def ensure_type_module!(mod) do
+    unless Code.ensure_loaded?(mod) && function_exported?(mod, :type, 0) do
+      raise ArgumentError, "invalid or unknown type `#{inspect(mod)}`."
+    end
+  end
+
   defmacro __before_compile__(_env) do
     quote do
       unless Module.defines_type?(__MODULE__, {:t, 0}) do
