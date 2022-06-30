@@ -74,7 +74,8 @@ defmodule FormMetal.Fields.NumericField do
 
           Ecto.Changeset.merge(changeset, attrs_changeset)
         end
-      end
+      end,
+      Field.value_delegation(:decimal)
     ]
   end
 

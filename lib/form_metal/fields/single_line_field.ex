@@ -48,7 +48,8 @@ defmodule FormMetal.Fields.SingleLineField do
           {module, fun, args} = Keyword.fetch!(unquote(params), :attrs_changeset)
           apply(module, fun, [field, params | args])
         end
-      end
+      end,
+      Field.value_delegation(:string)
     ]
   end
 

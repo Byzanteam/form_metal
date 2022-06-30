@@ -66,7 +66,8 @@ defmodule FormMetal.Fields.DateTimeField do
 
           Ecto.Changeset.merge(changeset, attrs_changeset)
         end
-      end
+      end,
+      Field.value_delegation(:naive_date_time)
     ]
   end
 

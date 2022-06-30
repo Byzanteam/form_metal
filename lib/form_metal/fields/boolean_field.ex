@@ -49,7 +49,8 @@ defmodule FormMetal.Fields.BooleanField do
 
           apply(module, fun, [field, params | args])
         end
-      end
+      end,
+      Field.value_delegation(:boolean)
     ]
   end
 
