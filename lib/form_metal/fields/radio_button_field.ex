@@ -1,16 +1,16 @@
-defmodule FormMetal.Fields.NumericField do
+defmodule FormMetal.Fields.RadioButtonField do
   @moduledoc """
-  Define a numeric field.
+  Define a radio_button field.
 
   #{FormMetal.Fields.Builder.options_doc()}
 
   ## Example
 
   ```elixir
-  defmodule MyNumericField do
+  defmodule MyRadioButtonField do
     @moduledoc false
 
-    use FormMetal.Fields.NumericField
+    use FormMetal.Fields.RadioButtonField
 
     build_field_type(%{
       uuid: Ecto.UUID.t()
@@ -43,8 +43,7 @@ defmodule FormMetal.Fields.NumericField do
           Module.eval_quoted(__MODULE__, unquote(block))
 
           embeds_one :settings, Settings, primary_key: false do
-            field :type, FormMetal.Fields.EctoTypes.NumericValueType
-            field :scale, :integer, default: 0
+            field :options, {:array, :string}
           end
         end
 
@@ -57,9 +56,8 @@ defmodule FormMetal.Fields.NumericField do
               required: true,
               with: fn settings, params ->
                 settings
-                |> Ecto.Changeset.cast(params, [:type, :scale])
-                |> Ecto.Changeset.validate_required([:type, :scale])
-                |> Ecto.Changeset.validate_number(:scale, greater_than_or_equal_to: 0)
+                |> Ecto.Changeset.cast(params, [:options], empty_values: [[]])
+                |> Ecto.Changeset.validate_required([:options])
               end
             )
 
@@ -69,8 +67,8 @@ defmodule FormMetal.Fields.NumericField do
           Ecto.Changeset.merge(changeset, attrs_changeset)
         end
       end,
-      value_type(quote do: Decimal.t()),
-      value_delegation(:decimal)
+      value_type(quote do: String.t()),
+      value_delegation(:string)
     ]
   end
 
@@ -88,8 +86,7 @@ defmodule FormMetal.Fields.NumericField do
       @type t() :: %__MODULE__{
               unquote_splicing(defs),
               settings: %__MODULE__.Settings{
-                type: FormMetal.Fields.EctoTypes.NumericValueType.t(),
-                scale: integer()
+                options: [String.t(), ...]
               }
             }
     end
