@@ -165,7 +165,6 @@
           {Credo.Check.Readability.Specs, [include_defp: false]},
           {Credo.Check.Readability.StrictModuleLayout, []},
           {Credo.Check.Readability.WithCustomTaggedTuple, []},
-          {Credo.Check.Refactor.ABCSize, []},
           {Credo.Check.Refactor.DoubleBooleanNegation, []},
           {Credo.Check.Refactor.FilterReject, []},
           {Credo.Check.Refactor.IoPuts, []},
@@ -187,6 +186,7 @@
           #   and be sure to use `mix credo --strict` to see low priority checks)
           #
           {Credo.Check.Consistency.MultiAliasImportRequireUse, []},
+          {Credo.Check.Refactor.ABCSize, []},
           {Credo.Check.Readability.AliasAs, []},
           {Credo.Check.Readability.BlockPipe, []},
           {Credo.Check.Readability.ImplTrue, []},
