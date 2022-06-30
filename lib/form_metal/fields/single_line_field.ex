@@ -34,10 +34,10 @@ defmodule FormMetal.Fields.SingleLineField do
 
   @impl FormMetal.Fields.Builder
   defmacro build_field(params, do: block) do
-    alias FormMetal.Fields.Field
+    import FormMetal.Fields.Field
 
     [
-      Field.prelude(),
+      prelude(),
       quote location: :keep do
         embedded_schema do
           Module.eval_quoted(__MODULE__, unquote(block))
@@ -49,7 +49,8 @@ defmodule FormMetal.Fields.SingleLineField do
           apply(module, fun, [field, params | args])
         end
       end,
-      Field.value_delegation(:string)
+      value_type(quote do: String.t()),
+      value_delegation(:string)
     ]
   end
 

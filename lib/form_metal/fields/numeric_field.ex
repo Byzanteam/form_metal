@@ -40,10 +40,10 @@ defmodule FormMetal.Fields.NumericField do
 
   @impl FormMetal.Fields.Builder
   defmacro build_field(params, do: block) do
-    alias FormMetal.Fields.Field
+    import FormMetal.Fields.Field
 
     [
-      Field.prelude(),
+      prelude(),
       quote location: :keep do
         embedded_schema do
           Module.eval_quoted(__MODULE__, unquote(block))
@@ -75,7 +75,8 @@ defmodule FormMetal.Fields.NumericField do
           Ecto.Changeset.merge(changeset, attrs_changeset)
         end
       end,
-      Field.value_delegation(:decimal)
+      value_type(quote do: Decimal.t()),
+      value_delegation(:decimal)
     ]
   end
 

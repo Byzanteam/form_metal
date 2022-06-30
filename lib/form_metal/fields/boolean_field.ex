@@ -34,10 +34,10 @@ defmodule FormMetal.Fields.BooleanField do
 
   @impl FormMetal.Fields.Builder
   defmacro build_field(params, do: block) do
-    alias FormMetal.Fields.Field
+    import FormMetal.Fields.Field
 
     [
-      Field.prelude(),
+      prelude(),
       quote location: :keep do
         embedded_schema do
           Module.eval_quoted(__MODULE__, unquote(block))
@@ -50,7 +50,8 @@ defmodule FormMetal.Fields.BooleanField do
           apply(module, fun, [field, params | args])
         end
       end,
-      Field.value_delegation(:boolean)
+      value_type(quote do: boolean()),
+      value_delegation(:boolean)
     ]
   end
 

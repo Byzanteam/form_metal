@@ -28,7 +28,7 @@ defmodule FormMetal.Fields.Field do
     end
   end
 
-  @spec value_delegation(atom() | {:list, atom()}) :: Macro.t()
+  @spec value_delegation(Ecto.Type.t()) :: Macro.t()
   def value_delegation(value_type) do
     quote do
       alias FormMetal.Values.Value
@@ -47,6 +47,13 @@ defmodule FormMetal.Fields.Field do
       def dump_value(field, value) do
         Value.dump(unquote(value_type), value)
       end
+    end
+  end
+
+  @spec value_type(Macro.t()) :: Macro.t()
+  def value_type(value_type) do
+    quote do
+      @type value() :: unquote(value_type) | nil
     end
   end
 

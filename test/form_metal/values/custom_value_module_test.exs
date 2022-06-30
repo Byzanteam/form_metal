@@ -4,7 +4,10 @@ defmodule FormMetal.Values.CustomValueModuleTest do
   alias FormMetal.Values.Value
 
   defmodule MyAtomValue do
-    @behaviour FormMetal.Values.Value
+    use Ecto.Type
+
+    @impl true
+    def type, do: :string
 
     @impl true
     # credo:disable-for-next-line Credo.Check.Warning.UnsafeToAtom

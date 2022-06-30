@@ -34,10 +34,10 @@ defmodule FormMetal.Fields.DateTimeField do
 
   @impl FormMetal.Fields.Builder
   defmacro build_field(params, do: block) do
-    alias FormMetal.Fields.Field
+    import FormMetal.Fields.Field
 
     [
-      Field.prelude(),
+      prelude(),
       quote location: :keep do
         embedded_schema do
           Module.eval_quoted(__MODULE__, unquote(block))
@@ -67,7 +67,8 @@ defmodule FormMetal.Fields.DateTimeField do
           Ecto.Changeset.merge(changeset, attrs_changeset)
         end
       end,
-      Field.value_delegation(:naive_date_time)
+      value_type(quote do: NaiveDateTime.t()),
+      value_delegation(:naive_datetime_usec)
     ]
   end
 
