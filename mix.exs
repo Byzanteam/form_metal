@@ -9,6 +9,7 @@ defmodule FormMetal.MixProject do
       start_permanent: Mix.env() == :prod,
       dialyzer: dialyzer(),
       aliases: aliases(),
+      elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps()
     ]
   end
@@ -41,4 +42,8 @@ defmodule FormMetal.MixProject do
       plt_file: {:no_warn, "priv/plts/form_metal.plt"}
     ]
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test"]
+  defp elixirc_paths(:prod), do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 end
