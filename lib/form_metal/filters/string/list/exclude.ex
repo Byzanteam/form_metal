@@ -16,12 +16,13 @@ defmodule FormMetal.Filters.String.List.Exclude do
         }
 
   defimpl FormMetal.Filters.Testers.InMemory do
+    alias FormMetal.Values.Value
     import FormMetal.Filters.Builders.InMemoryUtils
 
     @spec test(%@for{}) :: boolean()
     def test(filter) do
       nil_guard(filter) do
-        not Ecto.Type.include?(:string, filter.value, filter.source)
+        not Value.include?(:string, filter.value, filter.source)
       end
     end
   end

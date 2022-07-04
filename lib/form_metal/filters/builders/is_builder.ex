@@ -21,9 +21,11 @@ defmodule FormMetal.Filters.Builders.IsBuilder do
             }
 
       defimpl FormMetal.Filters.Testers.InMemory do
+        alias FormMetal.Values.Value
+
         @spec test(%@for{}) :: boolean()
         def test(filter) do
-          Ecto.Type.equal?(unquote(value_ecto_type), filter.source, filter.value)
+          Value.equal?(unquote(value_ecto_type), filter.source, filter.value)
         end
       end
     end
