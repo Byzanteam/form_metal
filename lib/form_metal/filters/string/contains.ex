@@ -5,6 +5,9 @@ defmodule FormMetal.Filters.String.Contains do
 
   use FormMetal.Filters.Filter
 
+  use FormMetal.Filters.Builders.ListBuilder,
+    operators: [:any, :all]
+
   embedded_schema do
     field :source, :string
     field :value, :string

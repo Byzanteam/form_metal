@@ -6,4 +6,7 @@ defmodule FormMetal.Filters.String.Is do
   use FormMetal.Filters.Builders.IsBuilder,
     value_ecto_type: :string,
     value_type: quote(do: String.t())
+
+  use FormMetal.Filters.Builders.ListBuilder,
+    operators: [:any, :all]
 end
