@@ -41,32 +41,13 @@ defmodule FormMetal.Fields.NumericField do
       quote location: :keep do
         embedded_schema do
           Module.eval_quoted(__MODULE__, unquote(block))
-
-          embeds_one :settings, Settings, primary_key: false do
-            field :type, FormMetal.Fields.EctoTypes.NumericValueType
-            field :scale, :integer, default: 0
-          end
         end
 
         @impl FormMetal.Fields.Field
         def changeset(field, params) do
-          changeset =
-            field
-            |> Ecto.Changeset.cast(params, [])
-            |> Ecto.Changeset.cast_embed(:settings,
-              required: true,
-              with: fn settings, params ->
-                settings
-                |> Ecto.Changeset.cast(params, [:type, :scale])
-                |> Ecto.Changeset.validate_required([:type, :scale])
-                |> Ecto.Changeset.validate_number(:scale, greater_than_or_equal_to: 0)
-              end
-            )
-
           {module, fun, args} = Keyword.fetch!(unquote(params), :attrs_changeset)
-          attrs_changeset = apply(module, fun, [field, params | args])
 
-          Ecto.Changeset.merge(changeset, attrs_changeset)
+          apply(module, fun, [field, params | args])
         end
       end,
       value_type(quote do: Decimal.t()),
@@ -86,11 +67,7 @@ defmodule FormMetal.Fields.NumericField do
   defmacro build_field_type({:%{}, _meta, defs}) do
     quote do
       @type t() :: %__MODULE__{
-              unquote_splicing(defs),
-              settings: %__MODULE__.Settings{
-                type: FormMetal.Fields.EctoTypes.NumericValueType.t(),
-                scale: integer()
-              }
+              unquote_splicing(defs)
             }
     end
   end
