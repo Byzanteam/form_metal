@@ -73,10 +73,16 @@ defmodule FormMetal.Fields.Field do
     end
   end
 
-  @spec ensure_type_module!(Ecto.Type.t()) :: no_return()
+  @spec ensure_type_module!(Ecto.Type.t()) :: term()
   def ensure_type_module!(mod) do
-    unless Code.ensure_loaded?(mod) && function_exported?(mod, :type, 0) do
-      raise ArgumentError, "invalid or unknown type `#{inspect(mod)}`."
+    case Code.ensure_compiled(mod) do
+      {:module, _module} ->
+        unless function_exported?(mod, :type, 0) do
+          raise ArgumentError, "unknown type `#{inspect(mod)}`."
+        end
+
+      {:error, reason} ->
+        raise ArgumentError, "invalid type `#{inspect(mod)}`, due to #{inspect(reason)}."
     end
   end
 
