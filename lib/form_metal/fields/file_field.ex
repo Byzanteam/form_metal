@@ -40,6 +40,7 @@ defmodule FormMetal.Fields.FileField do
   defmacro build_field(params, do: block) do
     import FormMetal.Fields.Field
     value_module = params |> Keyword.fetch!(:value_module) |> Macro.expand(__CALLER__)
+    flavor = Keyword.get(params, :flavor, :singular)
 
     ensure_type_module!(value_module)
 
@@ -58,7 +59,7 @@ defmodule FormMetal.Fields.FileField do
         end
       end,
       value_type(quote do: unquote(value_module).t()),
-      value_delegation(value_module)
+      value_delegation(flavor, value_module)
     ]
   end
 

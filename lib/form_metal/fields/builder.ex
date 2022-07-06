@@ -23,6 +23,9 @@ defmodule FormMetal.Fields.Builder do
         and parameters arguments will be prepended to the given args. For example,
         using `with: {Author, :attrs_changeset, ["hello"]}` will be invoked as
         `Author.attrs_changeset(schema, params, "hello")`
+
+      * `:flavor` - the type of the field will be built.
+        It is `:singular` (default) or `:list`.
     """
   end
 end

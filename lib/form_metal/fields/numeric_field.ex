@@ -35,6 +35,7 @@ defmodule FormMetal.Fields.NumericField do
   @impl FormMetal.Fields.Builder
   defmacro build_field(params, do: block) do
     import FormMetal.Fields.Field
+    flavor = Keyword.get(params, :flavor, :singular)
 
     [
       prelude(),
@@ -51,7 +52,7 @@ defmodule FormMetal.Fields.NumericField do
         end
       end,
       value_type(quote do: Decimal.t()),
-      value_delegation(:decimal)
+      value_delegation(flavor, :decimal)
     ]
   end
 

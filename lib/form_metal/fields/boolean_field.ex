@@ -35,6 +35,7 @@ defmodule FormMetal.Fields.BooleanField do
   @impl FormMetal.Fields.Builder
   defmacro build_field(params, do: block) do
     import FormMetal.Fields.Field
+    flavor = Keyword.get(params, :flavor, :singular)
 
     [
       prelude(),
@@ -51,7 +52,7 @@ defmodule FormMetal.Fields.BooleanField do
         end
       end,
       value_type(quote do: boolean()),
-      value_delegation(:boolean)
+      value_delegation(flavor, :boolean)
     ]
   end
 

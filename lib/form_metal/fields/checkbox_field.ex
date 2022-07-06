@@ -35,6 +35,7 @@ defmodule FormMetal.Fields.CheckboxField do
   @impl FormMetal.Fields.Builder
   defmacro build_field(params, do: block) do
     import FormMetal.Fields.Field
+    flavor = Keyword.get(params, :flavor, :singular)
 
     [
       prelude(),
@@ -68,7 +69,7 @@ defmodule FormMetal.Fields.CheckboxField do
         end
       end,
       value_type(quote do: [String.t(), ...]),
-      value_delegation({:array, :string})
+      value_delegation(flavor, {:array, :string})
     ]
   end
 

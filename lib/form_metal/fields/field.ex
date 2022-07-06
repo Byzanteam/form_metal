@@ -28,8 +28,14 @@ defmodule FormMetal.Fields.Field do
     end
   end
 
-  @spec value_delegation(Ecto.Type.t()) :: Macro.t()
-  def value_delegation(value_type) do
+  @spec value_delegation(flavor :: :singular | :list, Ecto.Type.t()) :: Macro.t()
+  def value_delegation(flavor \\ :singular, value_type) do
+    value_type =
+      case flavor do
+        :singular -> value_type
+        :list -> {:array, value_type}
+      end
+
     quote do
       alias FormMetal.Values.Value
 
