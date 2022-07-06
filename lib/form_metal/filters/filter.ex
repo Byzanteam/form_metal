@@ -9,7 +9,7 @@ defmodule FormMetal.Filters.Filter do
 
       @before_compile unquote(__MODULE__)
 
-      @typep maybe(t) :: t | nil
+      @typep maybe(t) :: FormMetal.Types.maybe(t)
     end
   end
 

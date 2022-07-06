@@ -19,6 +19,8 @@ defmodule FormMetal.Fields.Field do
     quote do
       use Ecto.Schema
 
+      @typep maybe(t) :: FormMetal.Types.maybe(t)
+
       @primary_key false
       @timestamps_opts [type: :naive_datetime_usec]
 
@@ -61,12 +63,12 @@ defmodule FormMetal.Fields.Field do
     case flavor do
       :singular ->
         quote do
-          @type value() :: unquote(value_type) | nil
+          @type value() :: maybe(unquote(value_type))
         end
 
       :list ->
         quote do
-          @type value() :: [unquote(value_type) | nil] | nil
+          @type value() :: maybe([maybe(unquote(value_type))])
         end
     end
   end
