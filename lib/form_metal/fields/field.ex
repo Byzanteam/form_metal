@@ -56,10 +56,18 @@ defmodule FormMetal.Fields.Field do
     end
   end
 
-  @spec value_type(Macro.t()) :: Macro.t()
-  def value_type(value_type) do
-    quote do
-      @type value() :: unquote(value_type) | nil
+  @spec value_type(flavor :: :singular | :list, Macro.t()) :: Macro.t()
+  def value_type(flavor \\ :singular, value_type) do
+    case flavor do
+      :singular ->
+        quote do
+          @type value() :: unquote(value_type) | nil
+        end
+
+      :list ->
+        quote do
+          @type value() :: [unquote(value_type) | nil] | nil
+        end
     end
   end
 

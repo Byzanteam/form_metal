@@ -58,7 +58,7 @@ defmodule FormMetal.Fields.FileField do
           apply(module, fun, [field, params | args])
         end
       end,
-      value_type(quote do: unquote(value_module).t()),
+      value_type(flavor, quote(do: unquote(value_module).t())),
       value_delegation(flavor, value_module)
     ]
   end

@@ -51,7 +51,7 @@ defmodule FormMetal.Fields.NumericField do
           apply(module, fun, [field, params | args])
         end
       end,
-      value_type(quote do: Decimal.t()),
+      value_type(flavor, quote(do: Decimal.t())),
       value_delegation(flavor, :decimal)
     ]
   end
