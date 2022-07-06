@@ -40,17 +40,17 @@ defmodule FormMetal.Fields.Field do
       alias FormMetal.Values.Value
 
       @impl FormMetal.Fields.Field
-      def cast_value(field, value) do
+      def cast_value(_field, value) do
         Value.cast(unquote(value_type), value)
       end
 
       @impl FormMetal.Fields.Field
-      def load_value(field, value) do
+      def load_value(_field, value) do
         Value.load(unquote(value_type), value)
       end
 
       @impl FormMetal.Fields.Field
-      def dump_value(field, value) do
+      def dump_value(_field, value) do
         Value.dump(unquote(value_type), value)
       end
     end
