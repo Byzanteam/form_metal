@@ -27,7 +27,7 @@ defmodule FormMetal.Filters.Builders.ExcludeBuilder do
         @spec test(%@for{}) :: boolean()
         def test(filter) do
           nil_guard(filter) do
-            Value.include?(unquote(value_ecto_type), filter.value, filter.source)
+            not Ecto.Type.include?(unquote(value_ecto_type), filter.value, filter.source)
           end
         end
       end

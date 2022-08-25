@@ -25,7 +25,7 @@ defmodule FormMetal.Filters.Builders.IsBuilder do
 
         @spec test(%@for{}) :: boolean()
         def test(filter) do
-          Value.equal?(unquote(value_ecto_type), filter.source, filter.value)
+          Ecto.Type.equal?(unquote(value_ecto_type), filter.source, filter.value)
         end
       end
     end
