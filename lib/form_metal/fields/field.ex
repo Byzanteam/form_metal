@@ -9,10 +9,6 @@ defmodule FormMetal.Fields.Field do
   @doc "Make a field change."
   @callback changeset(field, params :: map()) :: Ecto.Changeset.t(field) when field: field()
 
-  @callback cast_value(field(), value()) :: {:ok, term()} | :error
-  @callback load_value(field(), value()) :: {:ok, term()} | :error
-  @callback dump_value(field(), value()) :: {:ok, term()} | :error
-
   @doc "The field prelude that adds preset configuration to the field."
   @spec prelude() :: Macro.t()
   def prelude do
@@ -27,34 +23,6 @@ defmodule FormMetal.Fields.Field do
       @before_compile FormMetal.Fields.Field
       @behaviour FormMetal.Fields.Field
       @defoverridable FormMetal.Fields.Field
-    end
-  end
-
-  @spec value_delegation(flavor :: :singular | :list, Ecto.Type.t()) :: Macro.t()
-  def value_delegation(flavor \\ :singular, value_type) do
-    value_type =
-      case flavor do
-        :singular -> value_type
-        :list -> {:array, value_type}
-      end
-
-    quote do
-      alias FormMetal.Values.Value
-
-      @impl FormMetal.Fields.Field
-      def cast_value(_field, value) do
-        Value.cast(unquote(value_type), value)
-      end
-
-      @impl FormMetal.Fields.Field
-      def load_value(_field, value) do
-        Value.load(unquote(value_type), value)
-      end
-
-      @impl FormMetal.Fields.Field
-      def dump_value(_field, value) do
-        Value.dump(unquote(value_type), value)
-      end
     end
   end
 

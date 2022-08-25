@@ -50,8 +50,7 @@ defmodule FormMetal.Fields.SingleLineField do
           apply(module, fun, [field, params | args])
         end
       end,
-      value_type(flavor, quote(do: String.t())),
-      value_delegation(flavor, :string)
+      value_type(flavor, quote(do: String.t()))
     ]
   end
 
