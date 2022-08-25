@@ -9,6 +9,9 @@ defmodule FormMetal.Fields.Field do
   @doc "Make a field change."
   @callback changeset(field, params :: map()) :: Ecto.Changeset.t(field) when field: field()
 
+  @doc "Resolve ecto value type"
+  @callback ecto_value_type() :: Ecto.Type.t()
+
   @doc "The field prelude that adds preset configuration to the field."
   @spec prelude() :: Macro.t()
   def prelude do
@@ -26,17 +29,23 @@ defmodule FormMetal.Fields.Field do
     end
   end
 
-  @spec value_type(flavor :: :singular | :list, Macro.t()) :: Macro.t()
-  def value_type(flavor \\ :singular, value_type) do
+  @spec value_type(flavor :: :singular | :list, Macro.t(), Macro.t()) :: Macro.t()
+  def value_type(flavor \\ :singular, value_type, ecto_type) do
     case flavor do
       :singular ->
         quote do
           @type value() :: maybe(unquote(value_type))
+
+          @impl FormMetal.Fields.Field
+          def ecto_value_type, do: unquote(ecto_type)
         end
 
       :list ->
         quote do
           @type value() :: maybe([maybe(unquote(value_type))])
+
+          @impl FormMetal.Fields.Field
+          def ecto_value_type, do: {:array, unquote(ecto_type)}
         end
     end
   end
