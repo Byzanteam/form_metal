@@ -68,7 +68,7 @@ defmodule FormMetal.Fields.RadioButtonField do
           Ecto.Changeset.merge(changeset, attrs_changeset)
         end
       end,
-      value_type(flavor, quote(do: String.t()))
+      value_type(flavor, quote(do: String.t()), quote(do: :string))
     ]
   end
 
