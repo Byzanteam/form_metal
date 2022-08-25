@@ -51,8 +51,7 @@ defmodule FormMetal.Fields.BooleanField do
           apply(module, fun, [field, params | args])
         end
       end,
-      value_type(flavor, quote(do: boolean())),
-      value_delegation(flavor, :boolean)
+      value_type(flavor, quote(do: boolean()))
     ]
   end
 
