@@ -4,6 +4,6 @@ defmodule FormMetal.Filters.NaiveDatetime.List.Is do
   """
 
   use FormMetal.Filters.Builders.IsBuilder,
-    value_ecto_type: {:array, :naive_datetime_usec},
-    value_type: quote(do: [maybe(NaiveDateTime.t())])
+    value_ecto_type: {:array, :utc_datetime_usec},
+    value_type: quote(do: [maybe(DateTime.t())])
 end

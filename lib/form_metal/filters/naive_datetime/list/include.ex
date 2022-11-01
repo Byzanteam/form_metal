@@ -4,6 +4,6 @@ defmodule FormMetal.Filters.NaiveDatetime.List.Include do
   """
 
   use FormMetal.Filters.Builders.IncludeBuilder,
-    value_ecto_type: :naive_datetime_usec,
-    value_type: quote(do: NaiveDateTime.t())
+    value_ecto_type: :utc_datetime_usec,
+    value_type: quote(do: DateTime.t())
 end

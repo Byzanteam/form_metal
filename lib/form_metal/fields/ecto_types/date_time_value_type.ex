@@ -4,8 +4,8 @@ defmodule FormMetal.Fields.EctoTypes.DateTimeValueType do
 
   ## Types
 
-  * `datetime`: a `NaiveDateTime` struct.
-  * `date`: a `NaiveDateTime` struct which the time part is the beginning of the day.
+  * `datetime`: a `DateTime` struct.
+  * `date`: a `DateTime` struct which the time part is the beginning of the day.
   """
 
   use FormMetal.StringifiedEnum, [:datetime, :date]
