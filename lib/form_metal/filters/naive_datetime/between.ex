@@ -11,15 +11,15 @@ defmodule FormMetal.Filters.NaiveDatetime.Between do
     operators: [:any, :all]
 
   embedded_schema do
-    field :source, :naive_datetime_usec
-    field :start_at, :naive_datetime_usec
-    field :end_at, :naive_datetime_usec
+    field :source, :utc_datetime_usec
+    field :start_at, :utc_datetime_usec
+    field :end_at, :utc_datetime_usec
   end
 
   @type t() :: %__MODULE__{
-          source: maybe(NaiveDateTime.t()),
-          start_at: maybe(NaiveDateTime.t()),
-          end_at: maybe(NaiveDateTime.t())
+          source: maybe(DateTime.t()),
+          start_at: maybe(DateTime.t()),
+          end_at: maybe(DateTime.t())
         }
 
   defimpl FormMetal.Filters.Testers.InMemory do
@@ -28,8 +28,8 @@ defmodule FormMetal.Filters.NaiveDatetime.Between do
     @spec test(%@for{}) :: boolean()
     def test(filter) do
       nil_guard(filter) do
-        NaiveDateTime.compare(filter.source, filter.start_at) in [:eq, :lt] &&
-          NaiveDateTime.compare(filter.source, filter.end_at) in [:eq, :gt]
+        DateTime.compare(filter.source, filter.start_at) in [:eq, :lt] &&
+          DateTime.compare(filter.source, filter.end_at) in [:eq, :gt]
       end
     end
   end

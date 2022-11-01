@@ -9,13 +9,13 @@ defmodule FormMetal.Filters.NaiveDatetime.After do
     operators: [:any, :all]
 
   embedded_schema do
-    field :source, :naive_datetime_usec
-    field :value, :naive_datetime_usec
+    field :source, :utc_datetime_usec
+    field :value, :utc_datetime_usec
   end
 
   @type t() :: %__MODULE__{
-          source: maybe(NaiveDateTime.t()),
-          value: maybe(NaiveDateTime.t())
+          source: maybe(DateTime.t()),
+          value: maybe(DateTime.t())
         }
 
   defimpl FormMetal.Filters.Testers.InMemory do
@@ -24,7 +24,7 @@ defmodule FormMetal.Filters.NaiveDatetime.After do
     @spec test(%@for{}) :: boolean()
     def test(filter) do
       nil_guard(filter) do
-        NaiveDateTime.compare(filter.source, filter.value) === :gt
+        DateTime.compare(filter.source, filter.value) === :gt
       end
     end
   end

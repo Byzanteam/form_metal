@@ -21,7 +21,7 @@ defmodule FormMetal.Fields.Field do
       @typep maybe(t) :: FormMetal.Types.maybe(t)
 
       @primary_key false
-      @timestamps_opts [type: :naive_datetime_usec]
+      @timestamps_opts [type: :utc_datetime_usec]
 
       @before_compile FormMetal.Fields.Field
       @behaviour FormMetal.Fields.Field

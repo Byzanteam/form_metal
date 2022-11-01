@@ -68,7 +68,7 @@ defmodule FormMetal.Fields.DateTimeField do
           Ecto.Changeset.merge(changeset, attrs_changeset)
         end
       end,
-      value_type(flavor, quote(do: NaiveDateTime.t()), quote(do: :naive_datetime_usec))
+      value_type(flavor, quote(do: DateTime.t()), quote(do: :utc_datetime_usec))
     ]
   end
 

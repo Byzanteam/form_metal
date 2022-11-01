@@ -4,8 +4,8 @@ defmodule FormMetal.Filters.NaiveDatetime.Is do
   """
 
   use FormMetal.Filters.Builders.IsBuilder,
-    value_ecto_type: :naive_datetime_usec,
-    value_type: quote(do: NaiveDateTime.t())
+    value_ecto_type: :utc_datetime_usec,
+    value_type: quote(do: DateTime.t())
 
   use FormMetal.Filters.Builders.ListBuilder,
     operators: [:any, :all]
