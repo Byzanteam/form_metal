@@ -1,16 +1,16 @@
-defmodule FormMetal.Fields.DateTimeField do
+defmodule FormMetal.Fields.DateField do
   @moduledoc """
-  Define a date_time field.
+  Define a date field.
 
   #{FormMetal.Fields.Builder.options_doc()}
 
   ## Example
 
   ```elixir
-  defmodule MyDateTimeField do
+  defmodule MyDateField do
     @moduledoc false
 
-    use FormMetal.Fields.DateTimeField
+    use FormMetal.Fields.DateField
 
     build_field_type(%{
       uuid: Ecto.UUID.t()
@@ -51,7 +51,7 @@ defmodule FormMetal.Fields.DateTimeField do
           apply(module, fun, [field, params | args])
         end
       end,
-      value_type(flavor, quote(do: DateTime.t()), quote(do: :utc_datetime_usec))
+      value_type(flavor, quote(do: Date.t()), quote(do: :date))
     ]
   end
 
