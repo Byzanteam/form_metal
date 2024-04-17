@@ -43,7 +43,7 @@ defmodule FormMetal.Fields.RadioButtonField do
         embedded_schema do
           Module.eval_quoted(__MODULE__, unquote(block))
 
-          embeds_one :settings, Settings, primary_key: false do
+          embeds_one :settings, Settings, primary_key: false, on_replace: :update do
             field :options, {:array, :string}
           end
         end
